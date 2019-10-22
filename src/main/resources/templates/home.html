@@ -1,12 +1,21 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Hello World</title>
 </head>
 <body>
-<div>
-    <label>test</label>
-</div>
+    <div>
+        <label>test</label>
+        <img th:attr="src=@{/images/home_image.jpeg}" />
+    </div>
+
+    <form method="post" action="/goHome" th:object="${nesto}">
+        <label th:text="nesto" /> <!-- use * to access attr from object -->
+
+        <button type="submit">Press me</button>
+    </form>
 </body>
 </html>
