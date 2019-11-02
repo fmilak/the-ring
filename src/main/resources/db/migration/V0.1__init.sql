@@ -1,20 +1,20 @@
-create table tecaj
+CREATE SCHEMA IF NOT EXISTS dev;
+
+create table dev.user
 (
-	id int auto_increment,
-	broj_tecajnice int null,
-	datum_primjene date,
-	drzava varchar2(255),
-	sifra_valute varchar2(255),
-	valuta varchar2(255),
-	jedinica int,
-	kupovni decimal,
-	srednji decimal,
-	prodajni decimal
+	uuid varchar2(255) not null,
+	password varchar2(255) not null,
+	name varchar2(255) not null,
+	surname varchar2(255) not null,
+	email varchar2(255),
 );
 
-create unique index tecaj_id_uindex
-	on tecaj (id);
+create unique index user_uuid_uindex
+	on dev.user (uuid);
 
-alter table tecaj
-	add constraint tecaj_pk
-		primary key (id);
+alter table dev.user
+	add constraint user_pk
+		primary key (uuid);
+
+insert into dev.user (uuid, password, name, surname, email)
+    values ('4d2793c4-6550-4741-bb12-7c997597d854', 'admin', 'admin', 'admin', 'admin');
