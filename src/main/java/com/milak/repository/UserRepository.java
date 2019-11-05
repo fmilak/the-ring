@@ -1,13 +1,17 @@
 package com.milak.repository;
 
 import com.milak.model.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class UserRepository {
+import java.time.LocalDate;
+import java.util.List;
 
-    public User findByUsername(String username) {
-        return null; // todo
-    }
+@Repository
+@Mapper
+public interface UserRepository {
+
+    User findByUsername(String username);
 
 }

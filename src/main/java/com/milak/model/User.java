@@ -2,12 +2,21 @@ package com.milak.model;
 
 public class User { // todo -> use freebuilder
 
+    private String uuid;
     private String username;
     private String password;
     private String name;
     private String surname;
     private String email;
     private Role role;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getUsername() {
         return username;

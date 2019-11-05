@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.milak.repository.UserRepository">
+    <resultMap id="userResultMap" type="com.milak.model.User">
+        <result column="uuid" property="uuid" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="name" property="name" />
+        <result column="surname" property="surname" />
+        <result column="email" property="email" />
+        <result column="role" property="role" typeHandler="com.milak.model.typeHandler.RoleTypeHandler" />
+    </resultMap>
+
+    <select id="findByUsername" parameterType="java.lang.String" resultMap="userResultMap">
+        select *
+        from USER
+        where username = #{username}
+    </select>
+
+</mapper>
