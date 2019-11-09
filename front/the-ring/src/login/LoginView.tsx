@@ -2,9 +2,9 @@ import React, {useContext} from "react";
 import {Button, Form, Icon, Input} from "antd";
 import '../App.css'
 import {RootStoreContext} from "../App";
+import {observer} from "mobx-react";
 
-
-const LoginView: React.FC<any> = () => {
+const LoginView: React.FC<any> = observer(() => {
     const rootStore = useContext(RootStoreContext);
     const {loginStore} = rootStore;
 
@@ -12,13 +12,14 @@ const LoginView: React.FC<any> = () => {
         <Form>
             <Form.Item>
                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                       placeholder="Username" />
+                       placeholder="Username" onChange={loginStore.onUsernameChange} />
             </Form.Item>
             <Form.Item>
                 <Input
                     prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                     type="password"
                     placeholder="Password"
+                    onChange={loginStore.onPasswordChange}
                 />
             </Form.Item>
             <Form.Item>
@@ -26,6 +27,6 @@ const LoginView: React.FC<any> = () => {
             </Form.Item>
         </Form>
     )
-};
+});
 
 export default LoginView;
