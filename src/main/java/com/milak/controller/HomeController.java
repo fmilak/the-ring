@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/api/home")
 public class HomeController {
 
     @GetMapping

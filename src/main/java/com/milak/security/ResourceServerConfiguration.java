@@ -28,7 +28,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .and()
                 .antMatcher("/api/**")
                 .authorizeRequests()
-                .antMatchers("/api/signin/**").permitAll()
+                .antMatchers("/api/signin/**", "/api/home/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors().and().csrf().disable()
