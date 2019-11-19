@@ -5,6 +5,7 @@ class User {
     surname = '';
     email = '';
     role = ''; // todo
+    password = '';
 
 }
 

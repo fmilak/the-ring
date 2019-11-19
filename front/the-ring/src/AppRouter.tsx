@@ -7,6 +7,7 @@ import HomeView from "./layout/HomeView";
 import {Icon, Layout, Menu} from "antd";
 import {RootStoreContext} from "./App";
 import {observer} from "mobx-react";
+import RegisterView from "./login/RegisterView";
 
 const { Header, Content } = Layout;
 
@@ -49,7 +50,18 @@ const AppRouter = observer(() => {
                         </Content>
                     </Layout>
                 ) : (
-                    <LoginView/>
+                    <Switch>
+                        <Route path="/login">
+                            <LoginView />
+                        </Route>
+                        <Route path="/register">
+                            <RegisterView />
+                        </Route>
+
+                        <Route path="/">
+                            {() => customHistory.push("/login")}
+                        </Route>
+                    </Switch>
                 )}
 
             </div>

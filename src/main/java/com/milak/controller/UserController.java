@@ -8,8 +8,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -19,15 +17,15 @@ public class UserController {
 
     @GetMapping("/{username}")
     public ApiResponse getUser(@PathVariable String username) {
-        User user = userService.findUserByUsername(username);
-
-        ObjectMapper mapper = new ObjectMapper();
         ApiResponse apiResponse = new ApiResponse();
-        apiResponse.setSuccess(true);
         try {
+            User user = userService.findUserByUsername(username);
+            ObjectMapper mapper = new ObjectMapper();
+            apiResponse.setSuccess(true);
             apiResponse.setData(mapper.writeValueAsString(user));
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage(e.getMessage());
         }
 
         return apiResponse;

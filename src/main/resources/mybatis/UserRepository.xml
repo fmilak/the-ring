@@ -19,4 +19,23 @@
         where username = #{username}
     </select>
 
+    <insert id="createUser" parameterType="com.milak.model.User">
+        insert into USER (
+            UUID,
+            USERNAME,
+            PASSWORD,
+            NAME,
+            SURNAME,
+            EMAIL,
+            ROLE) values (
+            #{uuid},
+            #{username},
+            #{password},
+            #{name},
+            #{surname},
+            #{email},
+            #{role}
+        )
+    </insert>
+
 </mapper>

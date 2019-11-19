@@ -2,6 +2,7 @@ class ApiResponse {
 
     success = false;
     data: any;
+    message = '';
 
 }
 

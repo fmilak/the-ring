@@ -20,6 +20,7 @@ class RestService {
         const apiResponse: ApiResponse = new ApiResponse();
         apiResponse.success = responseJson.success;
         apiResponse.data = JSON.parse(responseJson.data);
+        apiResponse.message = responseJson.message;
         callback(apiResponse);
     }
 

@@ -3,11 +3,16 @@ import {Button, Form, Icon, Input} from "antd";
 import '../App.css'
 import {RestServiceContext, RootStoreContext} from "../App";
 import {observer} from "mobx-react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 const LoginView: React.FC<any> = observer(() => {
     const rootStore = useContext(RootStoreContext);
     const {loginStore} = rootStore;
+    const history = useHistory();
+
+    useEffect(() => {
+        loginStore.history = history;
+    }, []);
 
     return (
         <div>
@@ -27,10 +32,12 @@ const LoginView: React.FC<any> = observer(() => {
                 <Form.Item>
                     <Button onClick={loginStore.tryLogin}>Log in</Button>
                 </Form.Item>
+                <Form.Item>
+                    <Button onClick={() => {
+                        history.push("/register")
+                    }}>Register</Button>
+                </Form.Item>
             </Form>
-            {loginStore.isAuthenticated && (
-                <Redirect to="/" />
-            )}
         </div>
 
     )

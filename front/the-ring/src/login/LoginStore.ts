@@ -8,6 +8,8 @@ import ApiResponse from "../model/api/ApiResponse";
 
 class LoginStore {
 
+    history: any;
+
     @observable username = '';
 
     @observable password = '';
@@ -71,8 +73,28 @@ class LoginStore {
         };
         RestService.fetch(restInit, this.handleUserResponse).catch(err => console.log(err));
     };
+
     handleUserResponse = (apiResponse: ApiResponse): void => {
         this.user = apiResponse.data;
+    };
+
+    registerUser = (user: User): void => {
+        const restInit: RestInit = new RestInit();
+        restInit.url = '/api/sign-in/register';
+        restInit.method = 'POST';
+        restInit.header = {
+            'Content-Type': 'application/json'
+        };
+        restInit.body = JSON.stringify(user);
+        RestService.fetch(restInit, this.handleRegisterResponse).catch(err => console.log(err));
+    };
+
+    handleRegisterResponse = (apiResponse: ApiResponse): void => {
+        if (apiResponse.success) {
+            this.history.push('/login');
+        } else {
+            console.log(apiResponse.data);
+        }
     }
 
 }
