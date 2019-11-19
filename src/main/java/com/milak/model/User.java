@@ -1,13 +1,22 @@
 package com.milak.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class User { // todo -> use freebuilder
 
     private String uuid;
+
     private String username;
+
+    @JsonIgnore
     private String password;
+
     private String name;
+
     private String surname;
+
     private String email;
+
     private Role role;
 
     public String getUuid() {

@@ -7,17 +7,17 @@ const ProfileView = () => {
     const {profileName} = useParams();
     const rootStore = useContext(RootStoreContext);
     const {loginStore} = rootStore;
-    if (loginStore.username === profileName) {
+    if (loginStore.username !== profileName) {
         return (
-            <div>
-                <h3>{profileName}</h3>
-            </div>
+            <Route>
+                <Redirect to="/" />
+            </Route>
         )
     }
     return (
-        <Route>
-            <Redirect to="/" />
-        </Route>
+        <div>
+            <h3>{profileName}</h3>
+        </div>
     )
 };
 

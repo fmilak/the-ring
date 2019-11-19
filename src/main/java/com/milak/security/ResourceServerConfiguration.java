@@ -23,12 +23,13 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        // todo -> check this
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .antMatcher("/api/**")
                 .authorizeRequests()
-                .antMatchers("/api/signin/**", "/api/home/**").permitAll()
+                .antMatchers("/api/sign-in/**", "/api/home/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors().and().csrf().disable()

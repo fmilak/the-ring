@@ -23,7 +23,7 @@ public class HomeController {
         return "home";
     }
 
-    @PostMapping(value = "goHome")
+    @PostMapping(value = "/goHome")
     public void navigateToRealFrontend(Model model) {
         System.out.println("todo");
         System.out.println(model);
