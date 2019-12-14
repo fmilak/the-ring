@@ -4,7 +4,7 @@ class User {
     name = '';
     surname = '';
     email = '';
-    role = ''; // todo
+    role = '';
     password = '';
 
 }

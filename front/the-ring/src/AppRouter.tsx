@@ -38,9 +38,6 @@ const AppRouter = observer(() => {
                         <Content style={{ padding: '0 50px' }}>
                             <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
                                 <Switch>
-                                    <Route path="/login">
-                                        <LoginView />
-                                    </Route>
                                     <Route path="/:profileName" children={<ProfileView/>} />
                                     <Route path="/">
                                         <HomeView />

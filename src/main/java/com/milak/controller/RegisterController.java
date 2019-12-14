@@ -1,13 +1,11 @@
 package com.milak.controller;
 
 import com.milak.model.ApiResponse;
+import com.milak.model.Role;
 import com.milak.model.User;
 import com.milak.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/sign-in/")
@@ -18,7 +16,6 @@ public class RegisterController {
 
     @PostMapping("/register")
     public ApiResponse register(@RequestBody User newUser) {
-        // todo -> move this to some controller with exposed api
         ApiResponse apiResponse = new ApiResponse();
         try {
             userService.registerUser(newUser);
@@ -28,6 +25,14 @@ public class RegisterController {
             apiResponse.setSuccess(false);
             apiResponse.setMessage(e.getMessage());
         }
+        return apiResponse;
+    }
+
+    @GetMapping("/roles")
+    public ApiResponse getRoles() {
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setSuccess(true);
+        apiResponse.setData(Role.values());
         return apiResponse;
     }
 

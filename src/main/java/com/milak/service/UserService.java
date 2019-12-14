@@ -1,5 +1,6 @@
 package com.milak.service;
 
+import com.milak.model.Role;
 import com.milak.model.User;
 import com.milak.repository.UserRepository;
 import org.bouncycastle.crypto.generators.BCrypt;
@@ -24,6 +25,7 @@ public class UserService {
         }
         user.setUuid(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         userRepository.createUser(user);
     }
 

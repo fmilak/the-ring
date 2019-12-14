@@ -19,13 +19,14 @@ const LoginView: React.FC<any> = observer(() => {
             <Form>
                 <Form.Item>
                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                           placeholder="Username" onChange={loginStore.onUsernameChange} />
+                           placeholder="Username" onChange={loginStore.onUsernameChange} onPressEnter={loginStore.tryLogin} />
                 </Form.Item>
                 <Form.Item>
                     <Input
                         prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                         type="password"
                         placeholder="Password"
+                        onPressEnter={loginStore.tryLogin}
                         onChange={loginStore.onPasswordChange}
                     />
                 </Form.Item>

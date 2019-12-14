@@ -18,6 +18,8 @@ class LoginStore {
 
     @observable user = new User();
 
+    @observable roles: Array<string> = new Array<string>();
+
     @action
     onUsernameChange = (e: any): void => {
         this.username = e.target.value;
@@ -26,6 +28,24 @@ class LoginStore {
     @action
     onPasswordChange = (e: any): void => {
         this.password = e.target.value;
+    };
+
+    initRoles = (): void => {
+        const restInit: RestInit = new RestInit();
+        restInit.url = `/api/sign-in/roles`;
+        restInit.method = 'GET';
+        restInit.header = {
+            'Content-Type': 'application/json'
+        };
+        RestService.fetch(restInit, this.handleInitRoles).catch(err => console.log(err));
+    };
+
+    handleInitRoles = (apiResponse: ApiResponse): void => {
+        if (apiResponse.success) {
+            this.roles = apiResponse.data
+        } else {
+            console.log(apiResponse.message);
+        }
     };
 
     @action
@@ -75,7 +95,7 @@ class LoginStore {
     };
 
     handleUserResponse = (apiResponse: ApiResponse): void => {
-        this.user = apiResponse.data;
+        this.user = JSON.parse(apiResponse.data);
     };
 
     registerUser = (user: User): void => {
@@ -85,6 +105,7 @@ class LoginStore {
         restInit.header = {
             'Content-Type': 'application/json'
         };
+        user.role = 'ADMIN'; // todo -> remove after implementing roles
         restInit.body = JSON.stringify(user);
         RestService.fetch(restInit, this.handleRegisterResponse).catch(err => console.log(err));
     };

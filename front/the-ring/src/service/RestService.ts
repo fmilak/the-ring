@@ -19,7 +19,7 @@ class RestService {
     private static handleResponseJson(responseJson: any, callback: Function): void {
         const apiResponse: ApiResponse = new ApiResponse();
         apiResponse.success = responseJson.success;
-        apiResponse.data = JSON.parse(responseJson.data);
+        apiResponse.data = responseJson.data;
         apiResponse.message = responseJson.message;
         callback(apiResponse);
     }
