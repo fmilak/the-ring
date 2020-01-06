@@ -116,8 +116,14 @@ class LoginStore {
         } else {
             console.log(apiResponse.data);
         }
-    }
+    };
 
+    // todo -> remove this method
+    autoLogin = () => {
+        this.username = 'admin';
+        this.password = 'admin';
+        this.tryLogin();
+    };
 }
 
 export default LoginStore;
