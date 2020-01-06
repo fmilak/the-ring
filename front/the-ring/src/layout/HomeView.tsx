@@ -2,7 +2,6 @@ import {observer} from "mobx-react";
 import React, {ReactElement, useContext} from "react";
 import {RootStoreContext} from "../App";
 import {Redirect, Route} from "react-router";
-import { isNil } from "lodash";
 
 const HomeView: React.FC = observer((): ReactElement => {
     const rootStore = useContext(RootStoreContext);
