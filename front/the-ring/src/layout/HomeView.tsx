@@ -5,22 +5,26 @@ import {Redirect, Route} from "react-router";
 import {Col, Icon, List, Row} from "antd";
 import Post from "../model/Post";
 import InfiniteScroll from "react-infinite-scroller";
+import {observable} from "mobx";
+import HomeStore from "./HomeStore";
 
-const IconText = ({ type, text }: {type: string, text: string}) => {
+const IconText = ({ type, text , homeStore}: {type: string, text: string, homeStore: HomeStore}) => {
     return (
-        <span>
+        <span onClick={() => {
+            homeStore.insertPost();
+        }}>
             <Icon type={type} style={{marginRight: 8}}/>
             {text}
         </span>
     )
 };
 
-const PostItem = observer(({post}: {post: Post}): ReactElement => {
+const PostItem = observer(({post, homeStore}: {post: Post, homeStore: HomeStore}): ReactElement => {
     return (
         <List.Item key={post.text} actions={[
-            <IconText type="star-o" text="156" key="list-vertical-star-o" />,
-            <IconText type="like-o" text="156" key="list-vertical-like-o" />,
-            <IconText type="message" text="2" key="list-vertical-message" />,
+            <IconText type="star-o" text="156" key="list-vertical-star-o" homeStore={homeStore} />,
+            <IconText type="like-o" text="156" key="list-vertical-like-o" homeStore={homeStore} />,
+            <IconText type="message" text="2" key="list-vertical-message" homeStore={homeStore} />,
         ]} extra={
             <img
                 width={272}
@@ -31,7 +35,7 @@ const PostItem = observer(({post}: {post: Post}): ReactElement => {
             <div>
                 {/* fixme*/}
                 <Row>
-                    <span>{post.creator.name} {post.creator.surname}</span>
+                    <span>{post.user.name} {post.user.surname}</span>
                 </Row>
                 <Row>
                     <label>
@@ -43,15 +47,21 @@ const PostItem = observer(({post}: {post: Post}): ReactElement => {
     )
 });
 
+const PostList = observer(({homeStore}: {homeStore: HomeStore}): ReactElement => {
+    return (
+        <InfiniteScroll initialLoad={false} useWindow={false} pageStart={0} loadMore={() => {}} hasMore>
+            <List dataSource={homeStore.allPosts} itemLayout="vertical" renderItem={(post) => <PostItem post={post} homeStore={homeStore} />} />
+        </InfiniteScroll>
+    )
+});
+
 const HomeView: React.FC = observer((): ReactElement => {
     const rootStore = useContext(RootStoreContext);
     const {loginStore, homeStore} = rootStore;
-    homeStore.loginStore = loginStore;
-    homeStore.initPosts();
-
+    
     useEffect(() => {
-        homeStore.initPosts();
-    }, []); // todo -> cant use it here because of navigation
+        homeStore.init(loginStore);
+    }, []);
 
     if (!loginStore.isAuthenticated) {
         return (
@@ -60,9 +70,7 @@ const HomeView: React.FC = observer((): ReactElement => {
     }
     return (
         <div style={{overflow: 'auto', overflowWrap: "normal", height: 830}}>
-            <InfiniteScroll initialLoad={false} useWindow={false} pageStart={0} loadMore={() => {}} hasMore>
-                <List dataSource={homeStore.allPosts} itemLayout="vertical" renderItem={(post) => <PostItem post={post} />} />
-            </InfiniteScroll>
+            <PostList homeStore={homeStore} />
         </div>
     )
 });

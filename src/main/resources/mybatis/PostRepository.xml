@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.milak.repository.PostRepository">
+    <resultMap id="postResultMap" type="com.milak.model.Post">
+        <result column="id" property="id" />
+        <result column="user_uuid" property="userUuid" />
+        <result column="text" property="text" />
+        <result column="picture" property="picture" />
+    </resultMap>
+
+    <select id="getPostById" parameterType="int" resultMap="postResultMap">
+        select *
+        from POST
+        where id = #{id}
+    </select>
+
+    <select id="getAllPosts" parameterType="int" resultMap="postResultMap">
+        select *
+        from POST
+    </select>
+
+    <insert id="insertPost" parameterType="com.milak.model.Post">
+        insert into POST (
+                          USER_UUID,
+                          TEXT,
+                          PICTURE
+                          )
+        values (
+                #{userUuid},
+                #{text},
+                #{picture}
+               )
+    </insert>
+
+</mapper>

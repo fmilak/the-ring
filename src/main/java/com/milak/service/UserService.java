@@ -37,4 +37,8 @@ public class UserService {
         return user;
     }
 
+    public User getUserByUuid(String uuid) {
+        return userRepository.getUserByUuid(uuid);
+    }
+
 }

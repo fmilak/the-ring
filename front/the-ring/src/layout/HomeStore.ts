@@ -2,27 +2,71 @@ import Post from "../model/Post";
 import User from "../model/User";
 import LoginStore from "../login/LoginStore";
 import {action, observable} from "mobx";
+import RestService from "../service/RestService";
+import RestInit from "../model/api/RestInit";
+import ApiResponse from "../model/api/ApiResponse";
 
 class HomeStore {
 
     loginStore!: LoginStore;
     @observable allPosts: Array<Post> = new Array<Post>();
 
+    init = (loginStore: LoginStore): void => {
+        this.loginStore = loginStore;
+        this.initPosts();
+    };
+    
     @action
     initPosts = (): void => {
-        // todo -> ask back for posts
+        const restInit: RestInit = new RestInit();
+        restInit.url = `/api/post`;
+        restInit.method = 'GET';
+        restInit.header = {
+            'Authorization': `bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+        };
+        RestService.fetch(restInit, this.handleInitPosts).catch(err => console.log(err));
+    };
+
+    insertPost = (): void => {
+        const restInit: RestInit = new RestInit();
+        restInit.url = `/api/post/insert/${this.loginStore.user.username}`;
+        restInit.method = 'POST';
+        restInit.header = {
+            'Authorization': `bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+        };
+        // todo -> this is test, remove after
         let post: Post = new Post();
         post.text = 'nesto';
-        post.creator = this.loginStore.user;
-        post.creator.name = 'admin';
-        post.creator.surname = 'admin';
-        this.allPosts.push(post);
-        this.allPosts.push(post);
-        this.allPosts.push(post);
-        this.allPosts.push(post);
-        this.allPosts.push(post);
-        this.allPosts.push(post);
-        this.allPosts.push(post);
+        post.user = this.loginStore.user;
+        post.user.name = 'admin';
+        post.user.surname = 'admin';
+        post.user.role = 'ADMIN';
+        restInit.body = JSON.stringify(post);
+
+        RestService.fetch(restInit, this.handleInsertPost).catch(err => console.log(err));
+    };
+    
+    handleInsertPost = (apiResponse: ApiResponse): void => {
+        if (apiResponse.success) {
+            console.log(apiResponse);
+            this.initPosts();
+        } else {
+            console.log(apiResponse.message);
+        }
+    };
+
+    @action
+    handleInitPosts = (apiResponse: ApiResponse): void => {
+        this.allPosts = new Array<Post>();
+        if (apiResponse.success) {
+            apiResponse.data.forEach((post: Post) => {
+                this.allPosts.push(post);
+            });
+        } else {
+            console.log(apiResponse.message);
+        }
     }
     
 }

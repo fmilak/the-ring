@@ -95,7 +95,9 @@ class LoginStore {
     };
 
     handleUserResponse = (apiResponse: ApiResponse): void => {
+        this.password = '';
         this.user = JSON.parse(apiResponse.data);
+        console.log(this.user);
     };
 
     registerUser = (user: User): void => {

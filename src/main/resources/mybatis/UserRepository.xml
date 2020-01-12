@@ -19,6 +19,12 @@
         where username = #{username}
     </select>
 
+    <select id="getUserByUuid" parameterType="java.lang.String" resultMap="userResultMap">
+        select *
+        from USER
+        where UUID = #{uuid}
+    </select>
+
     <insert id="createUser" parameterType="com.milak.model.User">
         insert into USER (
             UUID,
