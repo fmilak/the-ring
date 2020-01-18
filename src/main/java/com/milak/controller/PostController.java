@@ -42,4 +42,18 @@ public class PostController {
         return apiResponse;
     }
 
+    @DeleteMapping("/delete/{postId}")
+    public ApiResponse deletePost(@PathVariable String postId) {
+        ApiResponse apiResponse = new ApiResponse();
+        try {
+            postService.deletePost(Integer.parseInt(postId));
+        } catch (Exception e) {
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
+        apiResponse.setSuccess(true);
+        return apiResponse;
+    }
+
 }

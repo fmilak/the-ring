@@ -34,4 +34,9 @@
                )
     </insert>
 
+    <delete id="deletePost" parameterType="int" >
+        delete from POST
+            where ID = #{id}
+    </delete>
+
 </mapper>

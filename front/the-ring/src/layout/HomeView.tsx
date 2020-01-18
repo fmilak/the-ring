@@ -8,10 +8,21 @@ import InfiniteScroll from "react-infinite-scroller";
 import {observable} from "mobx";
 import HomeStore from "./HomeStore";
 
-const IconText = ({ type, text , homeStore}: {type: string, text: string, homeStore: HomeStore}) => {
+const IconText = ({ type, text , homeStore, post}: {type: string, text: string, homeStore: HomeStore, post: Post}) => {
     return (
         <span onClick={() => {
-            homeStore.insertPost();
+            switch (type) {
+                case 'star-o':
+                    homeStore.insertPost();
+                    break;
+                case 'like-o':
+                    homeStore.insertPost();
+                    break;
+                case 'message':
+                    homeStore.deletePost(post.id);
+                    break;
+            }
+
         }}>
             <Icon type={type} style={{marginRight: 8}}/>
             {text}
@@ -22,9 +33,9 @@ const IconText = ({ type, text , homeStore}: {type: string, text: string, homeSt
 const PostItem = observer(({post, homeStore}: {post: Post, homeStore: HomeStore}): ReactElement => {
     return (
         <List.Item key={post.text} actions={[
-            <IconText type="star-o" text="156" key="list-vertical-star-o" homeStore={homeStore} />,
-            <IconText type="like-o" text="156" key="list-vertical-like-o" homeStore={homeStore} />,
-            <IconText type="message" text="2" key="list-vertical-message" homeStore={homeStore} />,
+            <IconText type="star-o" text="156" key="list-vertical-star-o" homeStore={homeStore} post={post} />,
+            <IconText type="like-o" text="156" key="list-vertical-like-o" homeStore={homeStore} post={post} />,
+            <IconText type="message" text="2" key="list-vertical-message" homeStore={homeStore} post={post} />,
         ]} extra={
             <img
                 width={272}

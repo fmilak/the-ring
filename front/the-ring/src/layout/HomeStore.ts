@@ -67,6 +67,26 @@ class HomeStore {
         } else {
             console.log(apiResponse.message);
         }
+    };
+
+    deletePost = (id: number): void => {
+        const restInit: RestInit = new RestInit();
+        restInit.url = `/api/post/delete/${id}`;
+        restInit.method = 'delete';
+        restInit.header = {
+            'Authorization': `bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+        };
+
+        RestService.fetch(restInit, this.handleDeletePost).catch(err => console.log(err));
+    };
+
+    handleDeletePost = (apiResponse: ApiResponse): void => {
+        if (apiResponse.success) {
+            this.initPosts()
+        } else {
+            console.log(apiResponse.message);
+        }
     }
     
 }

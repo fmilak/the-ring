@@ -45,4 +45,7 @@ public class PostService {
         postRepository.insertPost(post);
     }
 
+    public void deletePost(int postId) {
+        postRepository.deletePost(postId);
+    }
 }
