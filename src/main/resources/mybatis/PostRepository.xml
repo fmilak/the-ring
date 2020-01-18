@@ -3,22 +3,38 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.milak.repository.PostRepository">
+
     <resultMap id="postResultMap" type="com.milak.model.Post">
         <result column="id" property="id" />
         <result column="user_uuid" property="userUuid" />
         <result column="text" property="text" />
         <result column="picture" property="picture" />
+        <collection property="user" resultMap="userResultMap" />
+    </resultMap>
+
+    <resultMap id="userResultMap" type="com.milak.model.User">
+        <result column="uuid" property="uuid" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="name" property="name" />
+        <result column="surname" property="surname" />
+        <result column="email" property="email" />
+        <result column="role" property="role" typeHandler="com.milak.model.typeHandler.RoleTypeHandler" />
     </resultMap>
 
     <select id="getPostById" parameterType="int" resultMap="postResultMap">
-        select *
-        from POST
-        where id = #{id}
+        select p.ID, p.USER_UUID, p.TEXT, p.PICTURE, u.UUID, u.USERNAME, u.PASSWORD, u.NAME, u.SURNAME, u.EMAIL, u.ROLE
+        from POST p
+        inner join USER u
+            on p.USER_UUID = u.UUID
+        where p.id = #{id}
     </select>
 
     <select id="getAllPosts" parameterType="int" resultMap="postResultMap">
-        select *
-        from POST
+        select p.ID, p.USER_UUID, p.TEXT, p.PICTURE, u.UUID, u.USERNAME, u.PASSWORD, u.NAME, u.SURNAME, u.EMAIL, u.ROLE
+        from POST p
+        inner join USER u
+            on p.USER_UUID = u.UUID
     </select>
 
     <insert id="insertPost" parameterType="com.milak.model.Post">

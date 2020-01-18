@@ -20,18 +20,11 @@ public class PostService {
     private UserService userService;
 
     public List<Post> getAllPosts() {
-        List<Post> posts = postRepository.getAllPosts();
-        for (Post post :
-                posts) {
-            post.setUser(userService.getUserByUuid(post.getUserUuid()));
-        }
-        return posts;
+        return postRepository.getAllPosts();
     }
 
     public Post getPostById(int id) {
-        Post post = postRepository.getPostById(id);
-        post.setUser(userService.getUserByUuid(post.getUserUuid()));
-        return post;
+        return postRepository.getPostById(id);
     }
 
     public void insertPost(Post post, String username) {

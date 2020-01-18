@@ -50,7 +50,7 @@ const PostItem = observer(({post, homeStore}: {post: Post, homeStore: HomeStore}
                 </Row>
                 <Row>
                     <label>
-                        {post.text}
+                        id: {post.id} -> text: {post.text}
                     </label>
                 </Row>
             </div>
