@@ -3,7 +3,6 @@ package com.milak.model;
 public class Post {
 
     private int id;
-    private String userUuid;
     private String text;
     private byte[] picture;
     private User user;
@@ -14,14 +13,6 @@ public class Post {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUserUuid() {
-        return userUuid;
-    }
-
-    public void setUserUuid(String userUuid) {
-        this.userUuid = userUuid;
     }
 
     public String getText() {

@@ -30,7 +30,6 @@ public class PostService {
     public void insertPost(Post post, String username) {
         try {
             post.setUser(userService.findUserByUsername(username));
-            post.setUserUuid(post.getUser().getUuid());
         } catch (Exception e) {
             LOGGER.warning(e.getMessage());
             return;

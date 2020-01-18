@@ -6,7 +6,6 @@
 
     <resultMap id="postResultMap" type="com.milak.model.Post">
         <result column="id" property="id" />
-        <result column="user_uuid" property="userUuid" />
         <result column="text" property="text" />
         <result column="picture" property="picture" />
         <collection property="user" resultMap="userResultMap" />
@@ -23,7 +22,7 @@
     </resultMap>
 
     <select id="getPostById" parameterType="int" resultMap="postResultMap">
-        select p.ID, p.USER_UUID, p.TEXT, p.PICTURE, u.UUID, u.USERNAME, u.PASSWORD, u.NAME, u.SURNAME, u.EMAIL, u.ROLE
+        select p.ID, p.TEXT, p.PICTURE, u.UUID, u.USERNAME, u.PASSWORD, u.NAME, u.SURNAME, u.EMAIL, u.ROLE
         from POST p
         inner join USER u
             on p.USER_UUID = u.UUID
@@ -31,7 +30,7 @@
     </select>
 
     <select id="getAllPosts" parameterType="int" resultMap="postResultMap">
-        select p.ID, p.USER_UUID, p.TEXT, p.PICTURE, u.UUID, u.USERNAME, u.PASSWORD, u.NAME, u.SURNAME, u.EMAIL, u.ROLE
+        select p.ID, p.TEXT, p.PICTURE, u.UUID, u.USERNAME, u.PASSWORD, u.NAME, u.SURNAME, u.EMAIL, u.ROLE
         from POST p
         inner join USER u
             on p.USER_UUID = u.UUID
@@ -44,7 +43,7 @@
                           PICTURE
                           )
         values (
-                #{userUuid},
+                #{user.uuid},
                 #{text},
                 #{picture}
                )
