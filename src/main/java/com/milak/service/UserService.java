@@ -25,9 +25,8 @@ public class UserService {
         }
         User.Builder builder = new User.Builder()
                 .from(user)
-                .setUuid(UUID.randomUUID().toString())
-                .setPassword(passwordEncoder.encode(user.getPassword()))
-                .setRole(Role.USER);
+                .setRegularUser()
+                .setPassword(passwordEncoder.encode(user.getPassword()));
 //        user.setUuid(UUID.randomUUID().toString());
 //        user.setPassword(passwordEncoder.encode(user.getPassword()));
 //        user.setRole(Role.USER);

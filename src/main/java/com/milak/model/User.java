@@ -1,5 +1,6 @@
 package com.milak.model;
 
+import com.milak.factory.UserFactory;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class User { // todo -> use freebuilder
@@ -18,6 +19,8 @@ public class User { // todo -> use freebuilder
     private String email;
 
     private Role role;
+
+    public User() {}
 
     private User(Builder builder) {
         this.uuid = builder.uuid;
@@ -109,6 +112,20 @@ public class User { // todo -> use freebuilder
             this.surname = user.surname;
             this.email = user.email;
             this.role = user.role;
+            return this;
+        }
+
+        public Builder setRegularUser() {
+            User user = UserFactory.getRegularUser();
+            this.uuid = user.getUuid();
+            this.role = user.getRole();
+            return this;
+        }
+
+        public Builder setAdminUser() {
+            User user = UserFactory.getRegularUser();
+            this.uuid = user.getUuid();
+            this.role = user.getRole();
             return this;
         }
 
