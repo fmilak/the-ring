@@ -23,14 +23,18 @@ public class UserService {
         if (userRepository.findByUsername(user.getUsername()) != null) {
             throw new Exception("User already exists");
         }
-        User.Builder builder = new User.Builder()
+        User userBuilder = new User.Builder()
                 .from(user)
                 .setRegularUser()
-                .setPassword(passwordEncoder.encode(user.getPassword()));
+                .setPassword(passwordEncoder.encode(user.getPassword())).build();
 //        user.setUuid(UUID.randomUUID().toString());
 //        user.setPassword(passwordEncoder.encode(user.getPassword()));
 //        user.setRole(Role.USER);
-        userRepository.createUser(builder.build());
+        userRepository.createUser(userBuilder);
+    }
+
+    public void updateUserLimit(String uuid) {
+        userRepository.updateCurrentLimit(uuid);
     }
 
     public User findUserByUsername(String username) throws Exception {

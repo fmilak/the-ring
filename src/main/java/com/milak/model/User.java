@@ -20,6 +20,10 @@ public class User { // todo -> use freebuilder
 
     private Role role;
 
+    private int maxLimit;
+
+    private int currentLimit;
+
     public User() {}
 
     private User(Builder builder) {
@@ -30,6 +34,8 @@ public class User { // todo -> use freebuilder
         this.surname = builder.surname;
         this.email = builder.email;
         this.role = builder.role;
+        this.maxLimit = builder.maxLimit;
+        this.currentLimit = builder.currentLimit;
     }
 
     public String getUuid() {
@@ -88,6 +94,22 @@ public class User { // todo -> use freebuilder
         this.role = role;
     }
 
+    public int getMaxLimit() {
+        return maxLimit;
+    }
+
+    public void setMaxLimit(int maxLimit) {
+        this.maxLimit = maxLimit;
+    }
+
+    public int getCurrentLimit() {
+        return currentLimit;
+    }
+
+    public void setCurrentLimit(int currentLimit) {
+        this.currentLimit = currentLimit;
+    }
+
     public static class Builder {
 
         private String uuid;
@@ -104,6 +126,10 @@ public class User { // todo -> use freebuilder
 
         private Role role;
 
+        private int maxLimit;
+
+        private int currentLimit;
+
         public Builder from(User user) {
             this.uuid = user.uuid;
             this.username = user.username;
@@ -112,6 +138,8 @@ public class User { // todo -> use freebuilder
             this.surname = user.surname;
             this.email = user.email;
             this.role = user.role;
+            this.maxLimit = user.maxLimit;
+            this.currentLimit = user.currentLimit;
             return this;
         }
 
@@ -119,6 +147,8 @@ public class User { // todo -> use freebuilder
             User user = UserFactory.getRegularUser();
             this.uuid = user.getUuid();
             this.role = user.getRole();
+            this.maxLimit = 1;
+            this.currentLimit = 0;
             return this;
         }
 
@@ -126,6 +156,8 @@ public class User { // todo -> use freebuilder
             User user = UserFactory.getRegularUser();
             this.uuid = user.getUuid();
             this.role = user.getRole();
+            this.maxLimit = 2;
+            this.currentLimit = 0;
             return this;
         }
 
@@ -161,6 +193,16 @@ public class User { // todo -> use freebuilder
 
         public Builder setRole(Role role) {
             this.role = role;
+            return this;
+        }
+
+        public Builder setMaxLimit(int maxLimit) {
+            this.maxLimit = maxLimit;
+            return this;
+        }
+
+        public Builder setCurrentLimit(int currentLimit) {
+            this.currentLimit = currentLimit;
             return this;
         }
 

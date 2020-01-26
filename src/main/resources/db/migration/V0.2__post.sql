@@ -3,7 +3,7 @@ create table post
 	id bigint identity not null primary key,
 	user_uuid varchar2(255) not null,
 	text varchar2(255),
-	picture blob,
+	picture blob
 );
 
 ALTER TABLE post
@@ -16,7 +16,7 @@ create table likes
     user_uuid varchar2(255) not null,
     post_id bigint not null,
     liked boolean,
-    disliked boolean,
+    disliked boolean
 );
 
 ALTER TABLE likes

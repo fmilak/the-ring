@@ -59,13 +59,14 @@ public class PostController {
         return apiResponse;
     }
 
-    @PostMapping(value = "/upload/{postId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ApiResponse uploadPicture(@RequestParam("image") MultipartFile image, @PathVariable int postId) {
+    @PostMapping(value = "/upload/{postId}/{username}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ApiResponse uploadPicture(@RequestParam("image") MultipartFile image, @PathVariable int postId,
+                                     @PathVariable String username) {
 
         ApiResponse apiResponse = new ApiResponse();
         try {
             byte[] bytes = image.getBytes();
-            postService.saveImage(bytes, postId);
+            postService.saveImage(bytes, postId, username);
 
         } catch (Exception e) {
             apiResponse.setSuccess(false);

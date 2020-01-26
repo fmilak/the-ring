@@ -6,7 +6,7 @@ create table user
 	name varchar2(255) not null,
 	surname varchar2(255) not null,
 	email varchar2(255),
-	role varchar2(255) not null,
+	role varchar2(255) not null
 );
 
 create unique index user_uuid_uindex

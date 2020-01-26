@@ -11,7 +11,13 @@
         <result column="surname" property="surname" />
         <result column="email" property="email" />
         <result column="role" property="role" typeHandler="com.milak.model.typeHandler.RoleTypeHandler" />
+        <result column="max_limit" property="maxLimit" />
+        <result column="current_limit" property="currentLimit" />
     </resultMap>
+
+    <update id="updateCurrentLimit" parameterType="java.lang.String">
+        update USER set CURRENT_LIMIT = CURRENT_LIMIT + 1 where UUID = #{uuid}
+    </update>
 
     <select id="findByUsername" parameterType="java.lang.String" resultMap="userResultMap">
         select *
@@ -33,14 +39,18 @@
             NAME,
             SURNAME,
             EMAIL,
-            ROLE) values (
+            ROLE,
+            MAX_LIMIT,
+            CURRENT_LIMIT) values (
             #{uuid},
             #{username},
             #{password},
             #{name},
             #{surname},
             #{email},
-            #{role}
+            #{role},
+            #{maxLimit},
+            #{currentLimit}
         )
     </insert>
 

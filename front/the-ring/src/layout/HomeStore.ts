@@ -49,13 +49,15 @@ class HomeStore {
     };
 
     uploadPicture = (input: any, postId: number): void => {
-        console.log(input.target.files);
+        if (this.loginStore.user.currentLimit >= this.loginStore.user.maxLimit) {
+            return;
+        }
         const file: any = input.target.files[0];
         const formData = new FormData();
         formData.append("image", file);
 
         const restInit: RestInit = new RestInit();
-        restInit.url = `/api/post/upload/${postId}`;
+        restInit.url = `/api/post/upload/${postId}/${this.loginStore.user.username}`;
         restInit.method = 'POST';
         restInit.header = {
             'Authorization': `bearer ${localStorage.getItem('token')}`,

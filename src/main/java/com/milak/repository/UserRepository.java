@@ -18,4 +18,6 @@ public interface UserRepository {
 
     void createUser(User user);
 
+    void updateCurrentLimit(String uuid);
+
 }
