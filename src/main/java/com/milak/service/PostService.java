@@ -40,4 +40,8 @@ public class PostService {
     public void deletePost(int postId) {
         postRepository.deletePost(postId);
     }
+
+    public void saveImage(byte[] bytes, int postId) {
+        postRepository.saveImage(bytes, postId);
+    }
 }

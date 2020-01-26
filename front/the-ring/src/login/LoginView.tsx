@@ -12,7 +12,7 @@ const LoginView: React.FC<any> = observer(() => {
 
     useEffect(() => {
         loginStore.history = history;
-        // loginStore.autoLogin(); // todo -> remove
+        loginStore.autoLogin(); // todo -> remove
     }, []);
 
     return (

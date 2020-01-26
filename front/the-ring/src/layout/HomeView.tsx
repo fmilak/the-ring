@@ -41,9 +41,9 @@ const PostItem = observer(({post, homeStore}: {post: Post, homeStore: HomeStore}
                 <img
                   width={272}
                   alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                  src={"data:image/png;base64," + post.picture}
                 />
-                <input type="file" accept="image/*" onChange={homeStore.uploadPicture}/>
+                <input type="file" accept="image/*" onChange={(file) => {homeStore.uploadPicture(file, post.id)}}/>
             </div>
 
         }>

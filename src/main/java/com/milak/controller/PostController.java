@@ -4,9 +4,11 @@ import com.milak.model.ApiResponse;
 import com.milak.model.Post;
 import com.milak.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.List;
 
 @RestController
@@ -57,12 +59,14 @@ public class PostController {
         return apiResponse;
     }
 
-    @PostMapping(value = "/upload", consumes = "multipart/form-data")
-    public ApiResponse uploadPicture(@RequestBody MultipartFile file) {
+    @PostMapping(value = "/upload/{postId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ApiResponse uploadPicture(@RequestParam("image") MultipartFile image, @PathVariable int postId) {
 
         ApiResponse apiResponse = new ApiResponse();
         try {
-            System.out.println(file);
+            byte[] bytes = image.getBytes();
+            postService.saveImage(bytes, postId);
+
         } catch (Exception e) {
             apiResponse.setSuccess(false);
             apiResponse.setMessage(e.getMessage());
