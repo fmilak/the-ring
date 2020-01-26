@@ -47,6 +47,25 @@ class HomeStore {
 
         RestService.fetch(restInit, this.handleInsertPost).catch(err => console.log(err));
     };
+
+    uploadPicture = (input: any): void => {
+        console.log(input.target.files);
+        const files: any = Array.from(input.target.files);
+        const formData = new FormData();
+        files.forEach((file: any, i: any) => {
+            formData.append(i, file)
+        })
+        const restInit: RestInit = new RestInit();
+        restInit.url = `/api/post/upload`;
+        restInit.method = 'POST';
+        restInit.header = {
+            'Authorization': `bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'multipart/form-data;boundary="MyBoundary',
+        };
+        restInit.body = formData;
+
+        RestService.fetch(restInit, this.handleInsertPost).catch(err => console.log(err));
+    }
     
     handleInsertPost = (apiResponse: ApiResponse): void => {
         if (apiResponse.success) {

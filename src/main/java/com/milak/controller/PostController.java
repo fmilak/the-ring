@@ -5,6 +5,7 @@ import com.milak.model.Post;
 import com.milak.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -47,6 +48,21 @@ public class PostController {
         ApiResponse apiResponse = new ApiResponse();
         try {
             postService.deletePost(Integer.parseInt(postId));
+        } catch (Exception e) {
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
+        apiResponse.setSuccess(true);
+        return apiResponse;
+    }
+
+    @PostMapping(value = "/upload", consumes = "multipart/form-data")
+    public ApiResponse uploadPicture(@RequestBody MultipartFile file) {
+
+        ApiResponse apiResponse = new ApiResponse();
+        try {
+            System.out.println(file);
         } catch (Exception e) {
             apiResponse.setSuccess(false);
             apiResponse.setMessage(e.getMessage());

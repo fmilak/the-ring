@@ -1,6 +1,6 @@
 class RestInit {
     method = '';
-    body = '';
+    body: any;
     header: any;
     url = '';
 }

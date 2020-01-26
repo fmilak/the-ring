@@ -37,11 +37,15 @@ const PostItem = observer(({post, homeStore}: {post: Post, homeStore: HomeStore}
             <IconText type="like-o" text="156" key="list-vertical-like-o" homeStore={homeStore} post={post} />,
             <IconText type="message" text="2" key="list-vertical-message" homeStore={homeStore} post={post} />,
         ]} extra={
-            <img
-                width={272}
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-            />
+            <div>
+                <img
+                  width={272}
+                  alt="logo"
+                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                />
+                <input type="file" accept="image/*" onChange={homeStore.uploadPicture}/>
+            </div>
+
         }>
             <div>
                 {/* fixme*/}
