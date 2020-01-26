@@ -1,14 +1,10 @@
 package com.milak.service;
 
-import com.milak.model.Role;
 import com.milak.model.User;
 import com.milak.repository.UserRepository;
-import org.bouncycastle.crypto.generators.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -27,9 +23,6 @@ public class UserService {
                 .from(user)
                 .setRegularUser()
                 .setPassword(passwordEncoder.encode(user.getPassword())).build();
-//        user.setUuid(UUID.randomUUID().toString());
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setRole(Role.USER);
         userRepository.createUser(userBuilder);
     }
 

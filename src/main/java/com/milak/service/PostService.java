@@ -27,12 +27,11 @@ public class PostService {
     private UserService userService;
 
     public List<Post> getAllPosts() {
-        List<Post> posts = postRepository.getAllPosts().stream().peek(post -> {
+        return postRepository.getAllPosts().stream().peek(post -> {
             if (post.getPicture() != null) {
                 post.setPicture(convertPicture(post.getPicture(), post.getId()));
             }
         }).collect(Collectors.toList());
-        return posts;
     }
 
     public byte[] convertPicture(byte[] original, int postId) {

@@ -2,7 +2,6 @@ package com.milak.controller;
 
 import com.milak.model.ApiResponse;
 import com.milak.model.User;
-import com.milak.security.LoginUserService;
 import com.milak.service.UserService;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
