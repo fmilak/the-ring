@@ -1,6 +1,7 @@
 package com.milak.service;
 
 import com.milak.model.Post;
+import com.milak.model.Role;
 import com.milak.model.User;
 import com.milak.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,10 +121,21 @@ public class PostService {
     }
 
     public void saveImage(byte[] bytes, int postId, String username) {
-        postRepository.saveImage(bytes, postId);
         try {
             User user = userService.findUserByUsername(username);
-            userService.updateUserLimit(user.getUuid());
+            UploadLimitService uls;
+            if (user.getRole() == Role.ADMIN) {
+                uls = new AdminUploadLimitService();
+            } else if (user.getRole() == Role.USER) {
+                uls = new UserUploadLimitService();
+            } else {
+                throw new Exception("User role unknown");
+            }
+
+            if (uls.checkUpload(user)) {
+                postRepository.saveImage(bytes, postId);
+                userService.updateUserLimit(user.getUuid());
+            }
         } catch (Exception e) {
             LOGGER.warning(e.getMessage());
         }

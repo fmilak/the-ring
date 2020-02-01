@@ -49,9 +49,6 @@ class HomeStore {
     };
 
     uploadPicture = (input: any, postId: number): void => {
-        if (this.loginStore.user.currentLimit >= this.loginStore.user.maxLimit) {
-            return;
-        }
         const file: any = input.target.files[0];
         const formData = new FormData();
         formData.append("image", file);

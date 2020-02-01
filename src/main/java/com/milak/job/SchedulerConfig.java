@@ -14,9 +14,11 @@ public class SchedulerConfig {
 
     @Bean
     public Trigger clearUploadsJobTrigger() {
-        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(10).repeatForever();
+        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
+                .withIntervalInSeconds(1000).repeatForever();
 
-        return TriggerBuilder.newTrigger().forJob(clearUploadsJobDetail()).withIdentity("clearUploadsJobTrigger").withSchedule(scheduleBuilder).build();
+        return TriggerBuilder.newTrigger().forJob(clearUploadsJobDetail())
+                .withIdentity("clearUploadsJobTrigger").withSchedule(scheduleBuilder).build();
     }
 
 }
