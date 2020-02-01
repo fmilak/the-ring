@@ -1,5 +1,7 @@
 package com.milak.model;
 
+import org.springframework.security.core.parameters.P;
+
 public class Post {
 
     private int id;
@@ -37,5 +39,14 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Post prototype() {
+        Post newPost = new Post();
+        newPost.setId(this.id);
+        newPost.setUser(this.user);
+        newPost.setText(this.text);
+        newPost.setPicture(this.picture);
+        return newPost;
     }
 }
