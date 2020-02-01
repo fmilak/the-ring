@@ -20,8 +20,13 @@
         <result column="email" property="email" />
         <result column="role" property="role" typeHandler="com.milak.model.typeHandler.RoleTypeHandler" />
     </resultMap>
+
     <update id="saveImage" parameterType="map">
         update POST set PICTURE = #{bytes} where id = #{postId}
+    </update>
+
+    <update id="clearAllUploads">
+        update USER set CURRENT_LIMIT = 0 where CURRENT_LIMIT != 0
     </update>
 
     <select id="getPostById" parameterType="int" resultMap="postResultMap">

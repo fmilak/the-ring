@@ -21,4 +21,6 @@ public interface PostRepository {
     List<Post> getAllPosts();
 
     void saveImage(byte[] bytes, int postId);
+
+    void clearAllUploads();
 }

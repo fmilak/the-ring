@@ -126,4 +126,8 @@ public class PostService {
             LOGGER.warning(e.getMessage());
         }
     }
+
+    public void clearAllUploads() {
+        postRepository.clearAllUploads();
+    }
 }
