@@ -15,11 +15,11 @@ public class HomeController {
     @GetMapping
     public String showHome(Model model) {
         List<String> outcomesList = new ArrayList<>();
-        outcomesList.add("Outcome 1");
-        outcomesList.add("Outcome 2");
-        outcomesList.add("Outcome 3");
-        outcomesList.add("Outcome 4");
-        outcomesList.add("Outcome 5");
+        outcomesList.add("outcome-1");
+        outcomesList.add("outcome-2");
+        outcomesList.add("outcome-3");
+        outcomesList.add("outcome-4");
+        outcomesList.add("outcome-5");
 
         User user = new User();
         user.setName("name");
