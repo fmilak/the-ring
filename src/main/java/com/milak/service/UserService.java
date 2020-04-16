@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -38,8 +40,20 @@ public class UserService {
         return user;
     }
 
+    public List<User> getAllUsers() {
+        return userRepository.getAllUsers();
+    }
+
+    public void deleteUser(String username) {
+        userRepository.deleteUser(username);
+    }
+
     public User getUserByUuid(String uuid) {
         return userRepository.getUserByUuid(uuid);
+    }
+
+    public void updateUser(User user) {
+        userRepository.updateUser(user);
     }
 
 }
