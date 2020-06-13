@@ -18,8 +18,8 @@ import java.util.List;
 @RequestMapping("/api/sign-in")
 public class RegisterController {
 
-    @Autowired
-    private JmsTemplate jmsTemplate;
+    /**@Autowired
+    private JmsTemplate jmsTemplate;*/
 
     @Autowired
     private UserService userService;
@@ -51,19 +51,19 @@ public class RegisterController {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
-        jmsTemplate.convertAndSend("Fetching all users");
+        //jmsTemplate.convertAndSend("Fetching all users");
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{username}")
     public void deleteUserByUsername(@PathVariable String username) {
-        jmsTemplate.convertAndSend("Deleting user with username: " + username);
+        //jmsTemplate.convertAndSend("Deleting user with username: " + username);
         userService.deleteUser(username);
     }
 
     @PutMapping(value = "/update")
     public void updateUser(@RequestBody User updatedUser) {
-        jmsTemplate.convertAndSend("Updating user with username: " + updatedUser.getUsername());
+        //jmsTemplate.convertAndSend("Updating user with username: " + updatedUser.getUsername());
         userService.updateUser(updatedUser);
     }
 
