@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/sign-in/")
+@RequestMapping("/api/sign-in")
 public class RegisterController {
 
     @Autowired
