@@ -25,6 +25,11 @@
         where username = #{username}
     </select>
 
+    <select id="getAllUsers" resultMap="userResultMap">
+        select *
+        from USER
+    </select>
+
     <select id="getUserByUuid" parameterType="java.lang.String" resultMap="userResultMap">
         select *
         from USER
@@ -53,5 +58,19 @@
             #{currentLimit}
         )
     </insert>
+
+    <delete id="deleteUser" parameterType="java.lang.String">
+        delete from USER
+              where USERNAME = #{username}
+    </delete>
+
+    <update id="updateUser" parameterType="com.milak.model.User">
+        update USER
+        set password = #{password},
+            name = #{name},
+            surname = #{surname},
+            email = #{email}
+        where username = #{username}
+    </update>
 
 </mapper>

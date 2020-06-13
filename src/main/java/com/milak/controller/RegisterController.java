@@ -28,7 +28,7 @@ public class RegisterController {
     public ResponseEntity<ApiResponse> register(@RequestBody User newUser) {
         ApiResponse apiResponse = new ApiResponse();
         try {
-            jmsTemplate.convertAndSend("Creating user with username: " + newUser.getUsername());
+            //jmsTemplate.convertAndSend("Creating user with username: " + newUser.getUsername());
             userService.registerUser(newUser);
             apiResponse.setMessage("User successfully created!");
             apiResponse.setSuccess(true);

@@ -5,6 +5,7 @@ import com.milak.model.Role;
 import com.milak.model.User;
 import com.milak.service.PostService;
 import com.milak.service.UserService;
+import org.apache.commons.codec.binary.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -48,7 +50,7 @@ public class IntegrationTest {
         List<Post> allPosts = postService.getAllPosts();
         Post lastPost = allPosts.stream().max(Comparator.comparing(Post::getId)).get();
 
-        assertSame(lastPost.getText(), getPost().getText());
+        assertTrue(StringUtils.equals(lastPost.getText(), getPost().getText()));
         assertSame(lastPost.getUser().getUsername(), user.getUsername());
 
         postService.deletePost(lastPost.getId());
