@@ -28,6 +28,7 @@ public class PostService {
     private UserService userService;
 
     public List<Post> getAllPosts() {
+        LOGGER.info("Getting all posts");
         return postRepository.getAllPosts().stream().map(post -> {
             Post newPost = post.prototype();
             if (newPost.getPicture() != null) {
@@ -115,6 +116,8 @@ public class PostService {
         }
         postRepository.insertPost(post);
     }
+
+
 
     public void deletePost(int postId) {
         postRepository.deletePost(postId);

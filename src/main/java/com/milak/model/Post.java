@@ -1,7 +1,5 @@
 package com.milak.model;
 
-import org.springframework.security.core.parameters.P;
-
 public class Post {
 
     private int id;
